@@ -157,7 +157,7 @@
           two = parseFloat(pdu.body.messages[i].lon)
           console.log(one)
           console.log(two)
-          if (parseInt(pdu.body.messages[i].pollution) < 50) {
+          if (parseInt(pdu.body.messages[i].pollution) > 50) {
             colors = "red"
           } else {
             colors = "blue"
