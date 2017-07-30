@@ -155,12 +155,12 @@
         for (i = 0; i < pdu.body.messages.length; i++) {
           one = parseFloat(pdu.body.messages[i].lat)
           two = parseFloat(pdu.body.messages[i].lon)
-          pownum = (parseInt(pdu.body.messages[i].pollution) - 50)
+          pownum = ((parseInt(pdu.body.messages[i].pollution) - 50) / 5)
           console.log(two)
           if (parseInt(pdu.body.messages[i].pollution) > 95) {
             colors = "red"
             pollute = parseInt(pdu.body.messages[i].pollution)
-            size = Math.pow(pownum, 1.01)
+            size = Math.pow(pownum, 1.05)
           } else {
             pollute = "Very Low"
             colors = "blue"
