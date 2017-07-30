@@ -142,7 +142,7 @@
 
       var subscription = rtm.subscribe(channel, RTM.SubscriptionMode.SIMPLE, {
         history: {
-          count: 5
+          count: 20
         }
       });
 
@@ -155,11 +155,14 @@
         for (i = 0; i < pdu.body.messages.length; i++) {
           one = parseFloat(pdu.body.messages[i].lat)
           two = parseFloat(pdu.body.messages[i].lon)
+
           console.log(one)
           console.log(two)
           if (parseInt(pdu.body.messages[i].pollution) > 50) {
             colors = "red"
+            pollute = parseInt(pdu.body.messages[i].pollution)
           } else {
+            pollute = "Very Low"
             colors = "blue"
           }
           circ = L.circle([one, two], {
@@ -169,7 +172,7 @@
             radius: 10
           }).addTo(map);
           circ.bindPopup(
-            "<img width='100px'src='" + pdu.body.messages[i].image_url + "'></img><p>Trash Pollution:" + parseInt(pdu.body.messages[i].pollution) + "</p>"
+            "<img width='100px'src='" + pdu.body.messages[i].image_url + "'></img><p>Trash Index: " + pollute + "</p>"
           );
         }
         console.log(JSON.stringify(pdu));
