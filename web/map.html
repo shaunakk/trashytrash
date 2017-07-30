@@ -157,15 +157,34 @@
           two = parseFloat(pdu.body.messages[i].lon)
           console.log(one)
           console.log(two)
+          if (parseInt(pdu.body.messages[i].pollution) < 50) {
+            colors = "red"
+          } else {
+            colors = "blue"
+          }
           circ = L.circle([one, two], {
-            color: 'red',
-            fillColor: '#f03',
-            fillOpacity: 0.5,
+            color: colors,
+            fillColor: colors,
+            fillOpacity: .5,
             radius: 10
           }).addTo(map);
+          circ.bindPopup(
+            "<img width='100px'src='" + pdu.body.messages[i].image_url + "'></img><p>Trash Pollution:" + parseInt(pdu.body.messages[i].pollution) + "</p>"
+          );
         }
         console.log(JSON.stringify(pdu));
       });
+      var pointA = new L.LatLng(37.56923222894213, -122.31691718101501);
+      var pointB = new L.LatLng(37.5618838008715, -122.32761651277542);
+      var pointList = [pointA, pointB];
+
+      var firstpolyline = new L.Polyline(pointList, {
+        color: 'red',
+        weight: 3,
+        opacity: 0.5,
+        smoothFactor: 1
+      });
+      firstpolyline.addTo(map);
     </script>
 </body>
 
