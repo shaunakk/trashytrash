@@ -19,6 +19,5 @@ def lambda_handler(event, context):
                     'RTM replied with the error {0}: {1}'.format(
                         pdu['body']['error'], pdu['body']['reason']))
 
-        message = {"lon": event['lon'], "lat": event['lat'], "diff": event['diff']}
+        message = {"lon": event['lon'], "lat": event['lat'], "diff": event['diff'], "image_url": event["image_url"], "labels": event["labels"], "pollution": event["pollution"]}
         client.publish("trash", message, callback=on_publish_ack)
-
