@@ -9,6 +9,7 @@
   "author": "Leonardo Aoun",
   "license": "ISC",
   "dependencies": {
+    "alexa-sdk": "^1.0.11",
     "twitter": "^1.7.1"
   }
 }
