@@ -155,24 +155,35 @@
         for (i = 0; i < pdu.body.messages.length; i++) {
           one = parseFloat(pdu.body.messages[i].lat)
           two = parseFloat(pdu.body.messages[i].lon)
-
+          pownum = (105 - parseInt(pdu.body.messages[i].pollution))
           console.log(one)
           console.log(two)
           if (parseInt(pdu.body.messages[i].pollution) > 50) {
             colors = "red"
             pollute = parseInt(pdu.body.messages[i].pollution)
+            size = Math.pow(pownum, 1.1)
           } else {
             pollute = "Very Low"
             colors = "blue"
+            size = 10
           }
+
           circ = L.circle([one, two], {
             color: colors,
             fillColor: colors,
             fillOpacity: .5,
-            radius: 10
+            radius: size
           }).addTo(map);
+          str = ""
+          if (pdu.body.messages[i].labels.length > 0) {
+            str = "Labels:"
+            for (j = 0; j < pdu.body.messages[i].labels.length; i++) {
+              str = str + ", " + pdu.body.messages[i].labels[j]
+
+            }
+          }
           circ.bindPopup(
-            "<img width='100px'src='" + pdu.body.messages[i].image_url + "'></img><p>Trash Index: " + pollute + "</p>"
+            "<img width='100px'src='" + pdu.body.messages[i].image_url + "'></img><p>Trash Index: " + pollute + "</p><p>" + str + "</p>"
           );
         }
         console.log(JSON.stringify(pdu));
