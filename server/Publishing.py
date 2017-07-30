@@ -7,6 +7,7 @@ from satori.rtm.client import make_client
 endpoint = "wss://nk635fwl.api.satori.com"
 appkey = "E1927d5B8DA276fBaD4486DD6cDc7FBF"
 
+
 def main():
     with make_client(endpoint=endpoint, appkey=appkey) as client:
         print('Connected to Satori RTM!')
@@ -22,10 +23,10 @@ def main():
                         'RTM replied with the error {0}: {1}'.format(
                             pdu['body']['error'], pdu['body']['reason']))
 
-            message = {"where": [34.134358, -118.321506]}
+            message = {"where": [-122.32503706914497, 37.56375471196111]}
             client.publish("trash", message, callback=on_publish_ack)
 
-            time.sleep(1)
+            time.sleep(.01)
 
 
 if __name__ == '__main__':
